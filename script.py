@@ -12,7 +12,7 @@ def func(x, a, b, c):
 data = pd.read_csv('brominewater-glycerol.csv')
 data2 = pd.read_csv('glycerol-ethanol.csv')
 
-option = 'pair1'
+option = 'pair2'
 regression = True
 
 if option == 'pair1':
@@ -30,10 +30,10 @@ if option == 'pair1':
         y2 = np.array(temp2, dtype=float)
 
         popt1, pcov1 = curve_fit(func, x, y1)
-        print("Glycerol: params = {}, R^2 = {}".format(popt1, func(x, *popt1)))
+        print("Glycerol: params = {}, R^2 = {}".format(popt1, r2_score(y1, func(x, *popt1))))
 
         popt2, pcov2 = curve_fit(func, x, y2)
-        print("Bromine water: params = {}, R^2 = {}".format(popt2, func(x, *popt2)))
+        print("Bromine water: params = {}, R^2 = {}".format(popt2, r2_score(y2, func(x, *popt1))))
 
         plt.plot(x, func(x, *popt1), 'r-', label="glycerol fitted curve")
         plt.plot(x, func(x, *popt2), 'g-', label="bromine water fitted curve")
@@ -55,10 +55,10 @@ elif option == 'pair2':
         y2 = np.array(temp2, dtype=float)
 
         popt1, pcov1 = curve_fit(func, x, y1)
-        print("Ethanol: params = {}, R^2 = {}".format(popt1, func(x, *popt1)))
+        print("Glycerol: params = {}, R^2 = {}".format(popt1, r2_score(y1, func(x, *popt1))))
 
         popt2, pcov2 = curve_fit(func, x, y2)
-        print("Glycerol: params = {}, R^2 = {}".format(popt2, func(x, *popt2)))
+        print("Bromine water: params = {}, R^2 = {}".format(popt2, r2_score(y2, func(x, *popt1))))
 
         plt.plot(x, func(x, *popt1), 'r-', label="ethanol fitted curve")
         plt.plot(x, func(x, *popt2), 'g-', label="glycerol fitted curve")
